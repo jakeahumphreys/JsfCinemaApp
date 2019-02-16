@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Admin Panel</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body> 
+          <div class="container">
+            <div class="header">
+                <h:form>
+                <h:commandButton type="submit" value="Home" action="index" immediate="true" />
+                <h:commandButton type="submit" value="Showings" action="showings" immediate="true" />
+                <h:commandButton type="submit" value="Register User" action="register" immediate="true" />
+                <h:commandButton type="submit" value="Refresh aPanel" action="admin" immediate="true" />
+                <h:commandButton type="submit" value="Logout" action="#{user.logOut()}" immediate="true" />
+                <span>Admin Panel </span>
+                </h:form>
+            </div>
+            
+        </div>
+        <div class="split left">
+        <h:form>
+            <h1>Add Showing</h1>
+            <h:panelGrid columns="2" styleClass="borderTable">
+            <h:outputText value="Film: "/>
+            <h:inputText value="#{addShowing.filmID}"/>
+            <h:outputText value="Screen: "/>
+            <h:inputText value="#{addShowing.screenID}"/>
+            <h:outputText value="Timeslot: "/>
+            <h:inputText value="#{addShowing.timeslot}"/>
+
+            <h:commandButton type="submit" value="Add Showing" action="#{addShowing.addShowing()}" />         
+            </h:panelGrid>
+        </h:form>
+ 
+        <h:form>
+            <h1>Add Film</h1>
+            <h:panelGrid columns="2" styleClass="borderTable" rowClasses="tableRow">
+            <h:outputText value="Film Title: "/>
+            <h:inputText value="#{addFilm.title}"/>
+            <h:outputText value="BBFC Age Rating: "/>
+            <h:inputText value="#{addFilm.bbfcAge}"/>
+            <h:outputText value="Runtime: "/>
+            <h:inputText value="#{addFilm.runtime}"/>
+            <h:outputText value="Leading Star: "/>
+            <h:inputText value="#{addFilm.lead}"/>
+            <h:commandButton type="submit" style="width:100px" value="Add Film" action="#{addFilm.addFilm()}" />         
+            </h:panelGrid>
+        </h:form>    
+        </div>
+        <div class="split right">
+          
+        <h:form>
+            <h1> Film Manager </h1>
+            <h:dataTable value="#{film.allFilms}"
+                         var="flm"
+                         styleClass="borderTable">   
+                <h:column>
+                    <f:facet name="header">filmID</f:facet>
+                    <h:outputText value="#{flm.filmID}"/>
+                </h:column> 
+                           
+                <h:column>
+                    <f:facet name="header">title</f:facet>
+                    <h:outputText value="#{flm.title}"/>
+                </h:column>
+                        
+                <h:column>
+                    <f:facet name="header">bbfcAge</f:facet>
+                    <h:outputText value="#{flm.bbfcAge}"/>
+                </h:column>
+                        
+                <h:column>
+                    <f:facet name="header">runtime</f:facet>
+                    <h:outputText value="#{flm.runtime}"/>
+                </h:column>
+                        
+                <h:column>
+                    <f:facet name="header">lead</f:facet>
+                    <h:outputText value="#{flm.lead}"/>
+                </h:column> 
+                    
+                <h:column>
+                    <f:facet name="header">Admin</f:facet>
+                    <h:commandButton value="Remove" action="#{removeFilm.removeFilm(flm.filmID)}" />
+                </h:column>
+            </h:dataTable>   
+        </h:form>
+        
+            <h:form>
+            <h1>Showing Manager</h1>
+            <h:dataTable value="#{showing.allShowings}"
+                         var="show"
+                         styleClass="borderTable">   
+                <h:column>
+                    <f:facet name="header">ShowingID</f:facet>
+                    <h:outputText value="#{show.showingID}"/>
+                </h:column> 
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{show.film.title}"/>
+                </h:column> 
+                           
+                <h:column>
+                    <f:facet name="header">Screen</f:facet>
+                    <h:outputText value="#{show.screen.screenID}"/>
+                </h:column>
+                        
+                <h:column>
+                    <f:facet name="header">Showing Time</f:facet>
+                    <h:outputText value="#{show.timeslot}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Admin</f:facet>
+                    <h:commandButton value="Remove" action="#{removeShowing.removeShowing(show.showingID)}" />
+                </h:column>
+                           
+            </h:dataTable>   
+        </h:form>
+           
+        
+        <h1>Screen Viewer </h1>
+        <h:form>
+            <h:dataTable value="#{screen.findAllScreens()}"
+                         var="scr"
+                         styleClass="borderTable">   
+                <h:column>
+                    <f:facet name="header">ScreenID</f:facet>
+                    <h:outputText value="#{scr.screenID}"/>
+                </h:column> 
+                           
+                <h:column>
+                    <f:facet name="header">CinemaID</f:facet>
+                    <h:outputText value="#{scr.cinema.cinemaID}"/>
+                </h:column>   
+            </h:dataTable>   
+        </h:form>   
+        </div>            
+    </h:body>
+</html>
+

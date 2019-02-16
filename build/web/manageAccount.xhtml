@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Manage Account</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="header">
+                <h:form>
+                <h:commandButton type="submit" value="Back" action="showings" immediate="true"/>
+                </h:form>
+            </div>
+            
+        </div>
+        
+        <h4> Note: You will be required to log back in after changing any details </h4>
+         
+        <h1> Current Address </h1>
+        <p>#{user.userInfo.address1},#{user.userInfo.address2},#{user.userInfo.town},#{user.userInfo.county},#{user.userInfo.postcode}</p>
+        
+        <h:form>
+            <h:panelGrid columns="2" styleClass="UserTable" rowClasses="borderTable">
+            <h:outputText value="Address Line 1: "/>
+            <h:inputText value="#{modifyUser.address1}"/>
+            <h:outputText value="Address Line 2: "/>
+            <h:inputText value="#{modifyUser.address2}"/>
+            <h:outputText value="Town: "/>
+            <h:inputText value="#{modifyUser.town}"/>
+            <h:outputText value="County: "/>
+            <h:inputText value="#{modifyUser.county}"/>
+            <h:outputText value="Postcode: "/>
+            <h:inputText value="#{modifyUser.postcode}"/>
+            <h:commandButton type="submit" value="Update address" action="#{modifyUser.modifyUser()}" />  
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

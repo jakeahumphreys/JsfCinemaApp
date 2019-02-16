@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Cinema Showings</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="header">
+                <span>Hello,<b>#{user.userInfo.username}</b></span>
+                <h:form>
+                <h:commandButton type="submit" value="View Bookings" action="viewBookings" immediate="true"/>
+                <h:commandButton type="submit" value="Modify Account" action="manageAccount" immediate="true"/>
+                <h:commandButton type="submit" value="Logout" action="#{user.logOut()}" immediate="true"/>
+                </h:form>
+            </div>
+            
+        </div>
+        <div align="center">
+        <h1>Current Showings</h1>
+        <h:form>
+            <h:dataTable value="#{showing.allShowings}"
+                         var="show"
+                         styleClass="frontTable">   
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{show.film.title}"/>
+                </h:column> 
+                           
+                <h:column>
+                    <f:facet name="header">Screen</f:facet>
+                    <h:outputText value="#{show.screen.screenID}"/>
+                </h:column>
+                        
+                <h:column>
+                    <f:facet name="header">Showing Time</f:facet>
+                    <h:outputText value="#{show.timeslot}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Options</f:facet>
+                    <h:commandButton value="Book showing" action="#{showing.getShowingDetails(show.showingID)}" />
+                </h:column>
+                           
+            </h:dataTable>   
+        </h:form>
+        <h2>You can view more information about a showing by clicking the 'view showing' button. </h2>
+        </div>
+        
+    </h:body>
+</html>
+
