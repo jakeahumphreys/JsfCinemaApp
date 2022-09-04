@@ -12,3 +12,5 @@ book tickets for a cinema screening.
 - User Management
 - Book screenings
 
+# Companion Application
+See https://github.com/jakeahumphreys/JsfCinemaAppMobileCompanion for the companion application.
